@@ -15,17 +15,23 @@ func LoadConfig() Config {
 	var cfg Config
 
 	if env := os.Getenv("DOCKERIZED"); env == "Yes" {
-		fo, err := os.Open("config.json")
+		data, err := os.ReadFile("config.json")
 		if err != nil {
-			log.Printf("Failed to open config file: %v\nLoading defaults...", err)
-			cfg = Config{Host: "0.0.0.0", Port: "3000"} // Our Dockerized defaults
+			log.Printf("Failed to read config file: %v\nLoading defaults...", err)
+			cfg = defaultConfig()
 		}
-		defer fo.Close()
-		jsonParser := json.NewDecoder(fo)
-		jsonParser.Decode(&cfg)
+		if err := json.Unmarshal(data, &cfg); err != nil {
+			log.Printf("Failed to unmarshal config file into struct: %v\n", err)
+			cfg = defaultConfig()
+		}
 	} else {
-		cfg = Config{Host: "0.0.0.0", Port: "3000"}
+		cfg = defaultConfig()
 	}
 
 	return cfg
+}
+
+// defaults for docker use
+func defaultConfig() Config {
+	return Config{Host: "0.0.0.0", Port: "3000"}
 }
