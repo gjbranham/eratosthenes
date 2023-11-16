@@ -9,7 +9,7 @@ import (
 )
 
 type response struct {
-	Prime int `json:"primeNum"`
+	Prime int64 `json:"primeNum"`
 }
 
 func GetPrime(c *gin.Context) {
