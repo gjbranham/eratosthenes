@@ -20,8 +20,7 @@ func GetPrime(c *gin.Context) {
 		return
 	}
 
-	sieve := domain.NewSieve()
-	prime, err := sieve.NthPrime(int64(primeIdx))
+	prime, err := domain.NthPrime(int64(primeIdx))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Parameter must be greater than 0"})
 		return

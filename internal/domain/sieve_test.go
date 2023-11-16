@@ -42,13 +42,12 @@ func TestNthPrimeTable(t *testing.T) {
 		},
 		// {
 		// 	n: 10000000, prime: 179424691,
-		// }, // takes about 9 seconds
+		// }, // takes 10-15 seconds
 	}
-	sieve := NewSieve()
 
 	for _, tt := range tests {
 		t.Run(fmt.Sprintf("n: %v, prime: %v", tt.n, tt.prime), func(t *testing.T) {
-			prime, err := sieve.NthPrime(tt.n)
+			prime, err := NthPrime(tt.n)
 			if err != nil {
 				t.Fatalf("unexpected error during test: %v", err)
 			}
@@ -58,18 +57,15 @@ func TestNthPrimeTable(t *testing.T) {
 }
 
 func TestNegative(t *testing.T) {
-	sieve := NewSieve()
-	_, err := sieve.NthPrime(-1)
+	_, err := NthPrime(-1)
 	if err == nil {
 		t.Fatal("expected error during test")
 	}
 }
 
 func FuzzNthPrime(f *testing.F) {
-	sieve := NewSieve()
-
 	f.Fuzz(func(t *testing.T, n int64) {
-		val, err := sieve.NthPrime(n)
+		val, err := NthPrime(n)
 		if err != nil {
 			log.Printf("fuzz test skipping val %v due to err: %v\n", n, err)
 			return
