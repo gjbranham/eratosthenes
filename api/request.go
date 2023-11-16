@@ -14,7 +14,7 @@ type response struct {
 
 func GetPrime(c *gin.Context) {
 	param := c.Param("n")
-	primeIdx, err := strconv.Atoi(param)
+	primeIdx, err := strconv.Atoi(param) // this will fail if n > sizeof int so casting to int64 later is fine
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Parameter must be an integer"})
 		return
@@ -22,6 +22,7 @@ func GetPrime(c *gin.Context) {
 	if primeIdx < 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Parameter must be greater than 0"})
 	}
+
 	sieve := sieve.NewSieve()
 	prime := sieve.NthPrime(int64(primeIdx))
 

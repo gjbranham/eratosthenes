@@ -12,8 +12,8 @@ type Sieve interface {
 }
 
 func NewSieve() Sieve {
-	var newSieve sieveObject
-	return newSieve
+	var sieve sieveObject
+	return sieve
 }
 
 func (m sieveObject) NthPrime(n int64) int64 {
@@ -30,7 +30,7 @@ func (m sieveObject) NthPrime(n int64) int64 {
 				primeList[count] = num
 				count++
 			}
-			num += 2
+			num += 2 // skip even numbers
 		} else {
 			break
 		}

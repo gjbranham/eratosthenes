@@ -1,35 +1,45 @@
-# SpecterOps coding assignment
-
-## Background
+# Background
 
 Prime numbers have many modern day applications and a long history in mathematics. This repository implements a simple REST API allowing clients to retrieve the Nth prime number, assuming a 0th index for the prime number 2.
 
-## Running the application
+## Usage
 
-### Clone
+### Clone the repository
 
 `git clone https://github.com/gjbranham/eratosthenes.git && cd eratosthenes/`
 
-### Build
+### Notes on Docker
 
-`go build -o ./bin/nth-prime ./cmd/nth-prime `
+Docker is the recommended way to interact with the application. The `build` Makefile target will run all unit tests during Docker image build.
 
-### Run server
+[If you do not have Docker installed](#manual-commands)
 
-`./bin/nth-prime`
+#### Build with Docker
 
-### Interact
+`make build`
 
-Submit a GET request for the Nth prime number:
+#### Run server with Docker
 
-`curl http://localhost:3000/prime/1239`
+`make run`
 
-### Test
+#### Interact with the API
 
-Run unit tests:
+Submit a GET request for the 1239th prime number:
 
-`go test -v ./... -coverprofile=.cover.out && go tool cover -func=.cover.out`
+`curl http://localhost:3000/nthPrime/1239`
 
-Run fuzzing test (will continue until manually killed):
+#### Fuzz testing
+
+Run fuzzing test (will continue until manually killed with ctrl+c):
 
 `go test -v -fuzz=NthPrime internal/sieve/*.go`
+
+### Manual commands
+
+If Docker is not installed, one may choose to build, run, and test the application manually:
+
+`make test_manual`
+
+`make build_manual`
+
+`make run_manual`
