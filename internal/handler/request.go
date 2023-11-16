@@ -1,11 +1,11 @@
-package api
+package handler
 
 import (
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/gjbranham/specter-ops/internal/sieve"
+	"github.com/gjbranham/eratosthenes/internal/domain"
 )
 
 type response struct {
@@ -19,12 +19,12 @@ func GetPrime(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Parameter must be an integer"})
 		return
 	}
-	if primeIdx < 0 {
+
+	sieve := domain.NewSieve()
+	prime, err := sieve.NthPrime(int64(primeIdx))
+	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Parameter must be greater than 0"})
 	}
-
-	sieve := sieve.NewSieve()
-	prime := sieve.NthPrime(int64(primeIdx))
 
 	response := response{
 		Prime: prime,

@@ -1,4 +1,4 @@
-module github.com/gjbranham/specter-ops
+module github.com/gjbranham/eratosthenes
 
 go 1.19
 

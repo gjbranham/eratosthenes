@@ -1,3 +1,4 @@
 .cover.out
 bin
 internal/sieve/testdata
+config.json

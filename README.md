@@ -8,6 +8,12 @@ Prime numbers have many modern day applications and a long history in mathematic
 
 `git clone https://github.com/gjbranham/eratosthenes.git && cd eratosthenes/`
 
+### Config
+
+This application uses a `config.json` file to load host and port values for the API server. Please see the included `example-config.json` file.
+
+Note: As this is a take-home assessment, everything will run correctly even if `config.json` does not exist.
+
 ### Notes on Docker
 
 Docker is the recommended way to interact with the application. The `build` Makefile target will run all unit tests during Docker image build.

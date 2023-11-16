@@ -1,14 +1,14 @@
-package sieve
+package domain
 
 import (
-	"log"
+	"errors"
 	"math"
 )
 
 type sieveObject struct{}
 
 type Sieve interface {
-	NthPrime(n int64) int64
+	NthPrime(n int64) (int64, error)
 }
 
 func NewSieve() Sieve {
@@ -16,9 +16,9 @@ func NewSieve() Sieve {
 	return sieve
 }
 
-func (m sieveObject) NthPrime(n int64) int64 {
+func (m sieveObject) NthPrime(n int64) (int64, error) {
 	if n < 0 {
-		log.Fatal("negative index not allowed")
+		return 0, errors.New("negative value not allowed")
 	}
 	primeList := make([]int64, n+1)
 	primeList[0] = 2
@@ -35,7 +35,7 @@ func (m sieveObject) NthPrime(n int64) int64 {
 			break
 		}
 	}
-	return primeList[n]
+	return primeList[n], nil
 }
 
 func isCandidateDivisible(primeList []int64, num int64) bool {
