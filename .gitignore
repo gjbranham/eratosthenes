@@ -1,1 +1,3 @@
 .cover.out
+bin
+internal/sieve/testdata

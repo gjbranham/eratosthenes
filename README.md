@@ -2,7 +2,7 @@
 
 ## Background
 
-Prime numbers have many modern day applications and a long history in mathematics. This repository implements a simple RESTful API allowing clients to retrieve the Nth prime number, assuming a 0th index for the prime number 2.
+Prime numbers have many modern day applications and a long history in mathematics. This repository implements a simple REST API allowing clients to retrieve the Nth prime number, assuming a 0th index for the prime number 2.
 
 ## Running the application
 
@@ -12,7 +12,17 @@ Prime numbers have many modern day applications and a long history in mathematic
 
 ### Build
 
-`go build ./...`
+`go build -o ./bin/nth-prime ./cmd/nth-prime `
+
+### Run server
+
+`./bin/nth-prime`
+
+### Interact
+
+Submit a GET request for the Nth prime number:
+
+`curl http://localhost:3000/prime/1239`
 
 ### Test
 
