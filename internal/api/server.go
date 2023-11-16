@@ -7,7 +7,7 @@ import (
 )
 
 func RunServer() {
-	cfg := config.LoadConfig() // load server and host from config file if available
+	cfg := config.LoadConfig() // get host and port from config file; default otherwise
 
 	router := gin.Default()
 

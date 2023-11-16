@@ -2,3 +2,4 @@
 bin
 internal/sieve/testdata
 config.json
+README.old

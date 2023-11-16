@@ -10,13 +10,13 @@ Prime numbers have many modern day applications and a long history in mathematic
 
 ### Config
 
-This application uses a `config.json` file to load host and port values used to set up the REST server. Please see the included `example-config.json` file.
+This application uses a `config.json` file to load host and port values for setting up the REST server. Please see the included `example-config.json` file.
 
 Note: As this is a take-home assessment, everything will run correctly even if `config.json` does not exist.
 
 ### Notes on Docker
 
-Docker is the recommended way to build and run the application. The `build` Makefile target will run all unit tests during Docker image build.
+Docker is the recommended way to build and run this application. The `build` Makefile target will also run all unit tests during Docker image build.
 
 [If you do not have Docker installed](#manual-commands)
 
@@ -24,13 +24,13 @@ Docker is the recommended way to build and run the application. The `build` Make
 
 `make build`
 
-#### Run the API through Docker image
+#### Run Docker image (deploys the API)
 
 `make run`
 
 #### Interact with the API
 
-Submit a GET request for the 1239th prime number:
+Submit a GET request for the Nth prime number. Example:
 
 `curl http://localhost:3000/nthPrime/1239`
 

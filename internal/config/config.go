@@ -31,7 +31,7 @@ func LoadConfig() Config {
 	return cfg
 }
 
-// defaults for docker use
+// defaults for Docker use
 func defaultConfig() Config {
 	return Config{Host: "0.0.0.0", Port: "3000"}
 }
