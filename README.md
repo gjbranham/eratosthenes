@@ -1,24 +1,25 @@
-# BHE Software Engineer Coding Exercise
+# SpecterOps coding assignment
 
-## The Sieve of Eratosthenes
+## Background
 
-Prime numbers have many modern day applications and a long history in mathematics. Utilizing your own resources research the sieve of Eratosthenes, an algorithm for generating prime numbers. Based on your research, implement an API that allows the caller to retrieve the Nth prime number.
-Some stub code and a test suite have been provided as a convenience, however, you are encouraged to deviate from Eratosthenes's algorithm, modify the existing functions/methods or anything else that might showcase your ability provided the following requirements are satisfied.
-Stub code has been provided in Go, C#, and Javascript. Please use the language that is most appropriate based on your own skillset
+Prime numbers have many modern day applications and a long history in mathematics. This repository implements a simple RESTful API allowing clients to retrieve the Nth prime number, assuming a 0th index for the prime number 2.
 
-### Requirements
+## Running the application
 
-- The library package provides an API for retrieving the Nth prime number using 0-based indexing where the 0th prime number is 2
-- Interviewers must be able to execute a suite of tests
-  - Go: `go test ./...`
-  - C#: `dotnet test Sieve.Tests`
-  - Javascript: `npm run test`
-- Your solution is committed to this project's `main` branch, no uncommitted changes or untracked files please.
+### Clone
 
-### Considerations
+`git clone https://github.com/gjbranham/eratosthenes.git && cd eratosthenes/`
 
-During the technical interview, your submission will be discussed and you will be evaluated in the following areas:
+### Build
 
-- Technical ability
-- Communication skills
-- Work habits and complementary skills
+`go build ./...`
+
+### Test
+
+Run unit tests:
+
+`go test -v ./... -coverprofile=.cover.out && go tool cover -func=.cover.out`
+
+Run fuzzing test (will continue until manually killed):
+
+`go test -v -fuzz=NthPrime internal/sieve/*.go`
