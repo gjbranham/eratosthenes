@@ -63,7 +63,6 @@ func TestNegative(t *testing.T) {
 	if err == nil {
 		t.Fatal("expected error during test")
 	}
-
 }
 
 func FuzzNthPrime(f *testing.F) {
