@@ -20,12 +20,10 @@ func LoadConfig() Config {
 		data, err := os.ReadFile("config.json")
 		if err != nil {
 			gin.DefaultWriter.Write([]byte(fmt.Sprintf("Failed to read config file: %v\nLoading defaults...", err)))
-
 			cfg = defaultConfig()
 		}
 		if err := json.Unmarshal(data, &cfg); err != nil {
 			gin.DefaultWriter.Write([]byte(fmt.Sprintf("Failed to unmarshal config file into struct: %v\n", err)))
-
 			cfg = defaultConfig()
 		}
 	} else {
