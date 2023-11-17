@@ -6,7 +6,7 @@ Prime numbers have many modern day applications and a long history in mathematic
 
 ### Clone the repository
 
-`git clone https://github.com/gjbranham/eratosthenes.git && cd eratosthenes/`
+`git clone https://github.com/gjbranham/eratosthenes.git && cd eratosthenes`
 
 ### Config
 
