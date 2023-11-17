@@ -2,8 +2,10 @@ package config
 
 import (
 	"encoding/json"
-	"log"
+	"fmt"
 	"os"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Config struct {
@@ -17,11 +19,13 @@ func LoadConfig() Config {
 	if env := os.Getenv("DOCKERIZED"); env == "Yes" {
 		data, err := os.ReadFile("config.json")
 		if err != nil {
-			log.Printf("Failed to read config file: %v\nLoading defaults...", err)
+			gin.DefaultWriter.Write([]byte(fmt.Sprintf("Failed to read config file: %v\nLoading defaults...", err)))
+
 			cfg = defaultConfig()
 		}
 		if err := json.Unmarshal(data, &cfg); err != nil {
-			log.Printf("Failed to unmarshal config file into struct: %v\n", err)
+			gin.DefaultWriter.Write([]byte(fmt.Sprintf("Failed to unmarshal config file into struct: %v\n", err)))
+
 			cfg = defaultConfig()
 		}
 	} else {

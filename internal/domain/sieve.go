@@ -2,29 +2,34 @@ package domain
 
 import (
 	"errors"
+	"fmt"
+
+	"github.com/gin-gonic/gin"
 )
 
-func NthPrime(n int64) (int64, error) {
+func NthPrime(n int) (int, error) {
 	if n < 0 {
 		return 0, errors.New("negative value not allowed")
 	}
-	primeList := make([]int64, 0, n+1)
+	if n >= 1e7 {
+		gin.DefaultWriter.Write([]byte(fmt.Sprintf("Warning: algorithm may take awhile for inputs larger than 1e7. input: %v\n", n)))
+	}
+	primeList := make([]int, 0, n)
 	primeList = append(primeList, 2)
-	count, num := int64(1), int64(3)
+	num := 3
 
-	for count <= n {
+	for len(primeList) <= n {
 		if isPrime(num, primeList) {
 			primeList = append(primeList, num)
-			count++
 		}
 		num += 2 // skip even numbers
 	}
 	return primeList[n], nil
 }
 
-func isPrime(num int64, primeList []int64) bool {
+func isPrime(num int, primeList []int) bool {
 	for _, p := range primeList {
-		if p*p > num {
+		if num < p*p {
 			return true
 		}
 		if num%p == 0 {

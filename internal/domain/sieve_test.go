@@ -11,8 +11,8 @@ import (
 
 func TestNthPrimeTable(t *testing.T) {
 	type test struct {
-		n     int64
-		prime int64
+		n     int
+		prime int
 	}
 
 	tests := []test{
@@ -32,17 +32,20 @@ func TestNthPrimeTable(t *testing.T) {
 			n: 986, prime: 7793,
 		},
 		{
-			n: 2000, prime: 17393,
+			n: 2 * 1e3, prime: 17393,
 		},
 		{
-			n: 100000, prime: 1299721,
+			n: 1e5, prime: 1299721,
 		},
 		{
-			n: 1000000, prime: 15485867,
+			n: 1e6, prime: 15485867,
 		},
+		{
+			n: 1e7, prime: 179424691,
+		}, // takes 10-15 seconds
 		// {
-		// 	n: 10000000, prime: 179424691,
-		// }, // takes 10-15 seconds
+		// 	n: 1e8, prime: 2038074751,
+		// }, // about 6 minutes
 	}
 
 	for _, tt := range tests {
@@ -51,7 +54,7 @@ func TestNthPrimeTable(t *testing.T) {
 			if err != nil {
 				t.Fatalf("unexpected error during test: %v", err)
 			}
-			assert.Equal(t, prime, tt.prime)
+			assert.Equal(t, tt.prime, prime)
 		})
 	}
 }
@@ -64,13 +67,13 @@ func TestNegative(t *testing.T) {
 }
 
 func FuzzNthPrime(f *testing.F) {
-	f.Fuzz(func(t *testing.T, n int64) {
+	f.Fuzz(func(t *testing.T, n int) {
 		val, err := NthPrime(n)
 		if err != nil {
 			log.Printf("fuzz test skipping val %v due to err: %v\n", n, err)
 			return
 		}
-		if !big.NewInt(val).ProbablyPrime(0) {
+		if !big.NewInt(int64(val)).ProbablyPrime(0) {
 			t.Errorf("the sieve produced a non-prime number at index %d", n)
 		}
 	})

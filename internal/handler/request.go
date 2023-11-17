@@ -9,18 +9,18 @@ import (
 )
 
 type response struct {
-	Prime int64 `json:"primeNum"`
+	Prime int `json:"primeNum"`
 }
 
 func GetPrime(c *gin.Context) {
 	param := c.Param("n")
-	primeIdx, err := strconv.Atoi(param) // this will fail if n > sizeof int so casting to int64 later is fine
+	primeIdx, err := strconv.Atoi(param)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Parameter must be an integer"})
 		return
 	}
 
-	prime, err := domain.NthPrime(int64(primeIdx))
+	prime, err := domain.NthPrime(primeIdx)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Parameter must be greater than 0"})
 		return
