@@ -46,7 +46,7 @@ Response:
 
 Run fuzzing test (will continue until manually killed with ctrl+c):
 
-`go test -v -fuzz=NthPrime internal/sieve/*.go`
+`make fuzz`
 
 ### Manual commands
 

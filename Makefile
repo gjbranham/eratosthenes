@@ -1,4 +1,4 @@
-.PHONY: build run test
+.PHONY: build run build_manual run_manual test_manual fuzz_test
 
 build:
 	docker build -t specter-ops-takehome .
@@ -14,3 +14,6 @@ run_manual: build_manual
 
 test_manual:
 	go test -v ./... -coverprofile=.cover.out && go tool cover -func=.cover.out
+
+fuzz:
+	go test -v -fuzz=NthPrime internal/domain/*.go
